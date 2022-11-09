@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -27,14 +29,8 @@ public class Ingredient {
   @ManyToOne
   private Recipe recipe;
 
-  @Enumerated(value = EnumType.STRING)
-  private Difficulty difficulty;
-
   @OneToOne(fetch = FetchType.EAGER)
   private UnitOfMeasure uom;
-
-  @ManyToMany
-  private Set<Category> categories;
 
   public Long getId() {
     return id;
@@ -74,22 +70,6 @@ public class Ingredient {
 
   public void setUom(UnitOfMeasure uom) {
     this.uom = uom;
-  }
-
-  public Difficulty getDifficulty() {
-    return difficulty;
-  }
-
-  public void setDifficulty(Difficulty difficulty) {
-    this.difficulty = difficulty;
-  }
-
-  public Set<Category> getCategories() {
-    return categories;
-  }
-
-  public void setCategories(Set<Category> categories) {
-    this.categories = categories;
   }
 
 }
