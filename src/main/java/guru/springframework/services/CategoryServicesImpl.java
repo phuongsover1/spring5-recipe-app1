@@ -4,11 +4,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.CategoryRepository;
 
+@Service
 public class CategoryServicesImpl implements CategoryServices {
 
   private final CategoryRepository categoryRepository;

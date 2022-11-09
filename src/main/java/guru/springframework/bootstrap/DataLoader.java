@@ -10,7 +10,7 @@ public class DataLoader implements CommandLineRunner {
 
   }
 
-  private void loadUnitOfMeasures() {
+  private void loadIngredients() {
 
   }
 
