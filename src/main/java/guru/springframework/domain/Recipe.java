@@ -46,6 +46,29 @@ public class Recipe {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
   private Set<Ingredient> ingredients;
 
+  public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
+      String directions, Set<Category> categories, Difficulty difficulty, Byte[] image, Notes notes,
+      Set<Ingredient> ingredients) {
+    this.description = description;
+    this.prepTime = prepTime;
+    this.cookTime = cookTime;
+    this.servings = servings;
+    this.source = source;
+    this.url = url;
+    this.directions = directions;
+    this.categories = categories;
+    this.difficulty = difficulty;
+    this.image = image;
+    this.notes = notes;
+    this.ingredients = ingredients;
+  }
+
+  public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
+      String directions, Set<Category> categories, Difficulty difficulty, Notes notes, Set<Ingredient> ingredients) {
+    this(description, prepTime, cookTime, servings, source, url, directions, categories, difficulty, null, notes,
+        ingredients);
+  }
+
   public String getDescription() {
     return description;
   }
