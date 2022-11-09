@@ -1,5 +1,7 @@
 package guru.springframework.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,11 @@ public class UnitOfMeasureServicesImpl implements UnitOfMeasureServices {
   @Override
   public UnitOfMeasure createUnitOfMeasure(String description) {
     return new UnitOfMeasure(description);
+  }
+
+  @Override
+  public Optional<UnitOfMeasure> findByDescription(String description) {
+    return unitOfMeasureRepository.findByDescription(description);
   }
 
 }
