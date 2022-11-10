@@ -29,6 +29,7 @@ public class CategoryServicesImpl implements CategoryServices {
 
   @Override
   public Optional<Category> findByDescription(String description) {
+
     return categoryRepository.findByDescription(description);
   }
 

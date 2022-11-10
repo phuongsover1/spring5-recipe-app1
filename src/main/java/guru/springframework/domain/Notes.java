@@ -19,7 +19,8 @@ public class Notes {
   @Lob
   private String recipeNotes;
 
-  public Notes(String string) {
+  public Notes(String recipeNotes) {
+    this.recipeNotes = recipeNotes;
   }
 
   public Notes() {

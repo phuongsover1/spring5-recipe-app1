@@ -9,8 +9,17 @@
 </head>
 
 <body>
-  <h1 th:text="'cId is: '  + ${cId}"></h1>
-  <h1 th:text="'uId is: ' + ${uId}"></h1>
+  <th:block th:each="recipe : ${recipes}">
+    <p th:text="${recipe.description}">Recipe's Description</p>
+    <ul>
+      <h6>Category</h6>
+      <th:block th:each="category : ${recipe.categories}">
+        <li th:text="${category.description}"></li>
+      </th:block>
+
+    </ul>
+  </th:block>
 </body>
+
 
 </html>

@@ -53,4 +53,9 @@ public class RecipeServicesImpl implements RecipeServices {
         notes, ingredients);
   }
 
+  @Override
+  public Iterable<Recipe> findAll() {
+    return recipeRepository.findAll();
+  }
+
 }
