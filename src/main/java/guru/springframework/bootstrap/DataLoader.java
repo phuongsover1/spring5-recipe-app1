@@ -51,10 +51,10 @@ public class DataLoader implements CommandLineRunner {
                 guacamole.getNotes().setRecipe(guacamole);
                 guacamole.getCategories().add(categoryServices.findByDescription("American").get());
 
-                guacamole.getIngredients().add(new Ingredient("Avocados", new BigDecimal(2), guacamole,
+                guacamole.addIngredient(new Ingredient("Avocados", new BigDecimal(2), guacamole,
                                 unitOfMeasureServices.findByDescription("Ripe").get()));
 
-                guacamole.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(1.0 / 4), guacamole,
+                guacamole.addIngredient(new Ingredient("Kosher salt", new BigDecimal(1.0 / 4), guacamole,
                                 unitOfMeasureServices.findByDescription("Teaspoon").get()));
                 recipeServices.save(guacamole);
 
@@ -69,10 +69,9 @@ public class DataLoader implements CommandLineRunner {
                 grilledChicken.getNotes().setRecipe(grilledChicken);
                 grilledChicken.getCategories().add(categoryServices.findByDescription("Maxican").get());
 
-                grilledChicken.getIngredients()
-                                .add(new Ingredient("Ancho chili powder", new BigDecimal(2), grilledChicken,
-                                                unitOfMeasureServices.findByDescription("Tablespoon").get()));
-                grilledChicken.getIngredients().add(new Ingredient("Dried oregano", new BigDecimal(1), grilledChicken,
+                grilledChicken.addIngredient(new Ingredient("Ancho chili powder", new BigDecimal(2), grilledChicken,
+                                unitOfMeasureServices.findByDescription("Tablespoon").get()));
+                grilledChicken.addIngredient(new Ingredient("Dried oregano", new BigDecimal(1), grilledChicken,
                                 unitOfMeasureServices.findByDescription("Teaspoon").get()));
 
                 Recipe temp = recipeServices.save(grilledChicken);
