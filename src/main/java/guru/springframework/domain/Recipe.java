@@ -46,6 +46,9 @@ public class Recipe {
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
   private Set<Ingredient> ingredients;
 
+  public Recipe() {
+  }
+
   public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
       String directions, Set<Category> categories, Difficulty difficulty, Byte[] image, Notes notes,
       Set<Ingredient> ingredients) {

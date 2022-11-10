@@ -21,6 +21,9 @@ public class Category {
   @ManyToMany(mappedBy = "categories")
   private Set<Recipe> recipes;
 
+  public Category() {
+  }
+
   public Category(String description, Set<Recipe> recipes) {
     this.description = description;
     this.recipes = recipes;

@@ -17,6 +17,9 @@ public class UnitOfMeasure {
     this.description = description;
   }
 
+  public UnitOfMeasure() {
+  }
+
   public String getDescription() {
     return description;
   }
