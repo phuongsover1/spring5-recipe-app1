@@ -1,5 +1,6 @@
 package guru.springframework.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
 public class Recipe {
@@ -47,7 +50,7 @@ public class Recipe {
   private Notes notes;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-  private Set<Ingredient> ingredients;
+  private Set<Ingredient> ingredients = new HashSet<>();
 
   public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
       String directions, Set<Category> categories, Difficulty difficulty, Byte[] image, Notes notes,
@@ -63,7 +66,7 @@ public class Recipe {
     this.difficulty = difficulty;
     this.image = image;
     this.notes = notes;
-    this.ingredients = ingredients;
+    ingredients.forEach(ingredient -> addIngredient(ingredient));
   }
 
   public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,

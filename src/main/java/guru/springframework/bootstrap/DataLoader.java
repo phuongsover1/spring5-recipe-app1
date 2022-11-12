@@ -3,8 +3,6 @@ package guru.springframework.bootstrap;
 import java.math.BigDecimal;
 import java.util.HashSet;
 
-import javax.xml.bind.PrintConversionEvent;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

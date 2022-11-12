@@ -8,8 +8,12 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = { "recipe" })
 @Data
 @Entity
 public class Notes {
@@ -23,5 +27,9 @@ public class Notes {
   @Lob
   @NonNull
   private String recipeNotes;
+
+  public Notes(String notes) {
+    this.recipeNotes = notes;
+  }
 
 }

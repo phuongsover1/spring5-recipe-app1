@@ -12,7 +12,9 @@ import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Notes;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class RecipeServicesImpl implements RecipeServices {
 
@@ -55,6 +57,7 @@ public class RecipeServicesImpl implements RecipeServices {
 
   @Override
   public Iterable<Recipe> findAll() {
+    log.debug("I'm in the service.");
     return recipeRepository.findAll();
   }
 
