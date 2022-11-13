@@ -48,7 +48,7 @@ public class RecipeServicesImplTest {
     // RecipeData đã được tạo ở trên
     Set<Recipe> recipes = (Set<Recipe>) recipeServicesImpl.findAll();
 
-    assertEquals(false, recipes.contains(recipe));
+    assertEquals(true, recipes.contains(recipe));
 
     recipeServicesImpl.findAll();
     verify(recipeRepository, times(2)).findAll();

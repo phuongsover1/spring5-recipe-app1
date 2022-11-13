@@ -1,5 +1,7 @@
 package guru.springframework.services;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -56,9 +58,14 @@ public class RecipeServicesImpl implements RecipeServices {
   }
 
   @Override
-  public Iterable<Recipe> findAll() {
+  public Set<Recipe> findAll() {
     log.debug("I'm in the service.");
-    return recipeRepository.findAll();
+    Iterable<Recipe> recipeIterable = recipeRepository.findAll();
+    int size = ((Collection<?>) recipeIterable).size();
+
+    Set<Recipe> recipes = new HashSet<>(size);
+    recipeIterable.forEach(recipes::add);
+    return recipes;
   }
 
 }
