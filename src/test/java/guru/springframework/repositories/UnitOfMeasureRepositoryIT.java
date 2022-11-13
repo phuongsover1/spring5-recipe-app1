@@ -15,7 +15,7 @@ import guru.springframework.domain.UnitOfMeasure;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class UnitOfMeasureRepositoryIntegrationTest {
+public class UnitOfMeasureRepositoryIT {
   @Autowired
   UnitOfMeasureRepository unitOfMeasureRepository;
 
