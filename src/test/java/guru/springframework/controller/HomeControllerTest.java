@@ -7,14 +7,20 @@ import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.configuration.MockAnnotationProcessor;
 import org.springframework.ui.Model;
 
+import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeServices;
 
 public class HomeControllerTest {
@@ -36,12 +42,23 @@ public class HomeControllerTest {
 
   @Test
   void testGetIndexPage() {
-    // assert that the getIndexPage method return a string ?
-    String viewName = homeController.getIndexPage(model);
-    assertEquals("index", viewName);
+    // given
+    Set<Recipe> recipes = new HashSet<>();
+    recipes.add(new Recipe());
 
-    verify(recipeServices, times(1)).findAll();
-    verify(model, times(1)).addAttribute(eq("recipes"), anySet());
+    Recipe recipe = new Recipe();
+    recipe.setId(3L);
+    recipes.add(recipe);
 
+    when(recipeServices.findAll()).thenReturn(recipes);
+
+    ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+
+    homeController.getIndexPage(model); // argument was captured after call the method in this line
+
+    verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+
+    // Watch the capture values
+    assertEquals(2, argumentCaptor.getValue().size());
   }
 }
