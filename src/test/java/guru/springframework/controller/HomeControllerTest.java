@@ -1,9 +1,6 @@
 package guru.springframework.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -14,15 +11,21 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.configuration.MockAnnotationProcessor;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeServices;
 
+@ExtendWith(MockitoExtension.class)
 public class HomeControllerTest {
 
   HomeController homeController;
@@ -38,6 +41,15 @@ public class HomeControllerTest {
     MockitoAnnotations.initMocks(this);
 
     homeController = new HomeController(recipeServices);
+  }
+
+  @Test
+  void testMockMVC() throws Exception {
+    MockMvc mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
+
+    mockMvc.perform(MockMvcRequestBuilders.get("/"))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.view().name("index"));
   }
 
   @Test
