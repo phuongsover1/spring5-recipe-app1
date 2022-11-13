@@ -20,6 +20,7 @@ public class UnitOfMeasureRepositoryIntegrationTest {
   UnitOfMeasureRepository unitOfMeasureRepository;
 
   @Test
+  @DirtiesContext
   void testFindByDescription() {
     Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 
