@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>guru.springframework</groupId>
 	<artifactId>spring5-recipe-app</artifactId>
@@ -14,7 +14,7 @@
 	<name>spring5-recipe-app</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>19</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,6 +50,19 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7-1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator-core</artifactId>
+			<version>0.52</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -65,10 +78,10 @@
 				<version>2.22.2</version>
 				<configuration>
 					<includes>
-					<include>**/*IT.java</include>
+						<include>**/*IT.java</include>
 					</includes>
 					<additionalClasspathElements>
-					<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
+						<additionalClasspathElement>${basedir}/target/classes</additionalClasspathElement>
 					</additionalClasspathElements>
 					<parallel>none</parallel>
 				</configuration>
@@ -81,7 +94,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 
 
 		</plugins>
