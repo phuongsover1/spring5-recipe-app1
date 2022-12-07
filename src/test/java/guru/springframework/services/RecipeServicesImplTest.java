@@ -1,35 +1,37 @@
 package guru.springframework.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 
+@ExtendWith(MockitoExtension.class)
 public class RecipeServicesImplTest {
 
+  @InjectMocks
   RecipeServicesImpl recipeServicesImpl;
 
   @Mock
   RecipeRepository recipeRepository;
-
-  @BeforeEach
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-
-    recipeServicesImpl = new RecipeServicesImpl(recipeRepository);
-  }
 
   @Test
   void testFindAll() {
@@ -52,5 +54,27 @@ public class RecipeServicesImplTest {
 
     recipeServicesImpl.findAll();
     verify(recipeRepository, times(2)).findAll();
+  }
+
+  @Test
+  void testFindById() {
+    // create sample recipe to retrieve when using findById() method in
+    // recipeServicesImpl
+    Recipe tempRecipe = new Recipe();
+    tempRecipe.setId(4L);
+    Optional<Recipe> recipeOptional = Optional.of(tempRecipe);
+
+    when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+    Recipe returnedRecipe = recipeServicesImpl.findById(4L);
+
+    // assert not null when calling findById()
+    assertNotNull(returnedRecipe);
+    assertEquals(returnedRecipe, tempRecipe);
+
+    // assert findById was called exact once before reaching this code
+    verify(recipeRepository, times(1)).findById(anyLong());
+    // assert findAll was not called
+    verify(recipeRepository, never()).findAll();
   }
 }

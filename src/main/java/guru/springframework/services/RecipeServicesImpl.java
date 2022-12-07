@@ -1,20 +1,18 @@
 package guru.springframework.services;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Notes;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -42,19 +40,60 @@ public class RecipeServicesImpl implements RecipeServices {
   }
 
   @Override
-  public Recipe createRecipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source,
-      String url, String directions, Set<Category> categories, Difficulty difficulty, Byte[] image, Notes notes,
+  public Recipe createRecipe(
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Byte[] image,
+      Notes notes,
       Set<Ingredient> ingredients) {
-    return new Recipe(description, prepTime, cookTime, servings, source, url, directions, categories, difficulty, image,
-        notes, ingredients);
+    return new Recipe(
+        description,
+        prepTime,
+        cookTime,
+        servings,
+        source,
+        url,
+        directions,
+        categories,
+        difficulty,
+        image,
+        notes,
+        ingredients);
   }
 
   @Override
-  public Recipe createRecipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source,
-      String url, String directions, Set<Category> categories, Difficulty difficulty, Notes notes,
+  public Recipe createRecipe(
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Notes notes,
       Set<Ingredient> ingredients) {
-    return new Recipe(description, prepTime, cookTime, servings, source, url, directions, categories, difficulty, null,
-        notes, ingredients);
+    return new Recipe(
+        description,
+        prepTime,
+        cookTime,
+        servings,
+        source,
+        url,
+        directions,
+        categories,
+        difficulty,
+        null,
+        notes,
+        ingredients);
   }
 
   @Override
@@ -68,4 +107,9 @@ public class RecipeServicesImpl implements RecipeServices {
     return recipes;
   }
 
+  @Override
+  public Recipe findById(Long id) {
+    log.debug("In findById()");
+    return recipeRepository.findById(id).orElse(null);
+  }
 }
