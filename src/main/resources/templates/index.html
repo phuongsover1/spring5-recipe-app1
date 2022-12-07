@@ -1,61 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+    />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet"   th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-  <title>Document</title>
-</head>
-
-<body>
-  <div class="container-fluid" style="margin-top: 20px;">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h1 class="panel-title">My Recipes!</h1>
-          </div>
-          <div class="panel-body">
-            <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}"></div>
-            <table class="table table-hover">
-              <thead class="thead-inverse">
-                <tr>
-                  <th>ID</th>
-                  <th>Description</th>
+  <body>
+    <div class="container-fluid" style="margin-top: 20px">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h1 class="panel-title">My Recipes!!!!!</h1>
+            </div>
+            <div class="panel-body">
+              <div
+                class="table-responsive"
+                th:if="${not #lists.isEmpty(recipes)}"
+              ></div>
+              <table class="table table-hover">
+                <thead class="thead-inverse">
+                  <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tr th:remove="all">
+                  <td th:text="${recipe.id}">123</td>
+                  <td th:text="${recipe.description}">Tasty Goodness 1</td>
                 </tr>
-              </thead>
-              <tr th:remove="all">
-                <td th:text="${recipe.id}">123</td>
-                <td th:text="${recipe.description}">Tasty Goodness 1</td>
-
-              </tr>
-              <tr th:remove="all">
-                <td th:text="${recipe.id}">123</td>
-                <td th:text="${recipe.description}">Tasty Goodness 2</td>
-
-              </tr>
-              <tr th:each="recipe : ${recipes}">
-                <td th:text="${recipe.id}">123</td>
-                <td th:text="${recipe.description}">Tasty Goodness 3</td>
-              </tr>
-            </table>
+                <tr th:remove="all">
+                  <td th:text="${recipe.id}">123</td>
+                  <td th:text="${recipe.description}">Tasty Goodness 2</td>
+                </tr>
+                <tr th:each="recipe : ${recipes}">
+                  <td th:text="${recipe.id}">123</td>
+                  <td th:text="${recipe.description}">Tasty Goodness 3</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script 
-    th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"
-    ></script>
-</body>
-
-
+    <!-- Latest compiled and minified JavaScript -->
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
 </html>
