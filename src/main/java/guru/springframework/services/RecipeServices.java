@@ -1,5 +1,6 @@
 package guru.springframework.services;
 
+import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Difficulty;
 import guru.springframework.domain.Ingredient;
@@ -45,4 +46,9 @@ public interface RecipeServices {
   Set<Recipe> findAll();
 
   Recipe findById(Long id);
+
+  Set<Recipe> getRecipes();
+  RecipeCommand saveRecipeCommand(RecipeCommand command);
+
+  RecipeCommand findCommandById(Long id);
 }
