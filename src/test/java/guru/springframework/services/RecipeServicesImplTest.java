@@ -72,4 +72,18 @@ public class RecipeServicesImplTest {
     // assert findAll was not called
     verify(recipeRepository, never()).findAll();
   }
+
+  @Test
+  void testDeleteById() {
+    // given
+    Long idToDelete = Long.valueOf("2");
+
+    // when
+    recipeServicesImpl.deleteById(idToDelete);
+
+    // no when since the deleteById is void type method
+
+    // then
+    verify(recipeRepository, times(1)).deleteById(anyLong());
+  }
 }

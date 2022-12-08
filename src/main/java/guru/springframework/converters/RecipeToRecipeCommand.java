@@ -4,6 +4,7 @@ import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,6 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
           recipe.getIngredients().add(ingredientConverter.convert(ingredient))
         );
     }
-
     return recipe;
   }
 }

@@ -3,6 +3,7 @@ package guru.springframework.controller;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
 import guru.springframework.services.RecipeServices;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/recipe")
+@Slf4j
 public class RecipeController {
 
   private final RecipeServices recipeServices;
@@ -49,5 +51,12 @@ public class RecipeController {
   public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
     RecipeCommand savedCommand = recipeServices.saveRecipeCommand(command);
     return "redirect:/recipe/show/" + savedCommand.getId();
+  }
+
+  @GetMapping("/{id}/delete")
+  public String deleteRecipe(@PathVariable String id) {
+    log.debug("In deleteRecipe mapping");
+    recipeServices.deleteById(Long.valueOf(id));
+    return "redirect:/";
   }
 }

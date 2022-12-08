@@ -58,6 +58,9 @@ public class DataLoader implements CommandLineRunner {
     guacamole
       .getCategories()
       .add(categoryServices.findByDescription("American").get());
+    guacamole
+      .getCategories()
+      .add(categoryServices.findByDescription("Fast Food").get());
 
     guacamole.setUrl("https://www.hihi.com.vn");
 
