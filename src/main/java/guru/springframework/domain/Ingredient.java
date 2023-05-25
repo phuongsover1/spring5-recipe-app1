@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(exclude = { "recipe" })
 @Data
 @Entity
@@ -32,11 +35,10 @@ public class Ingredient {
   private UnitOfMeasure uom;
 
   public Ingredient(
-    String description,
-    BigDecimal amount,
-    Recipe recipe,
-    UnitOfMeasure uom
-  ) {
+      String description,
+      BigDecimal amount,
+      Recipe recipe,
+      UnitOfMeasure uom) {
     this.description = description;
     this.amount = amount;
     this.recipe = recipe;
@@ -45,5 +47,9 @@ public class Ingredient {
 
   public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
     this(description, amount, null, uom);
+  }
+
+  public Ingredient(Long id, String description, BigDecimal amount, UnitOfMeasure uom) {
+    this(id, description, amount, null, uom);
   }
 }

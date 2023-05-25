@@ -22,16 +22,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RecipeServicesImpl implements RecipeServices {
 
+  private static final Recipe EMPTY_RECIPE = new Recipe();
+
   private final RecipeRepository recipeRepository;
   private final RecipeCommandToRecipe recipeCommandToRecipe;
   private final RecipeToRecipeCommand recipeToRecipeCommand;
 
   @Autowired
   public RecipeServicesImpl(
-    RecipeRepository recipeRepository,
-    RecipeCommandToRecipe recipeCommandToRecipe,
-    RecipeToRecipeCommand recipeToRecipeCommand
-  ) {
+      RecipeRepository recipeRepository,
+      RecipeCommandToRecipe recipeCommandToRecipe,
+      RecipeToRecipeCommand recipeToRecipeCommand) {
     this.recipeRepository = recipeRepository;
     this.recipeCommandToRecipe = recipeCommandToRecipe;
     this.recipeToRecipeCommand = recipeToRecipeCommand;
@@ -53,63 +54,59 @@ public class RecipeServicesImpl implements RecipeServices {
 
   @Override
   public Recipe createRecipe(
-    String description,
-    Integer prepTime,
-    Integer cookTime,
-    Integer servings,
-    String source,
-    String url,
-    String directions,
-    Set<Category> categories,
-    Difficulty difficulty,
-    Byte[] image,
-    Notes notes,
-    Set<Ingredient> ingredients
-  ) {
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Byte[] image,
+      Notes notes,
+      Set<Ingredient> ingredients) {
     return new Recipe(
-      description,
-      prepTime,
-      cookTime,
-      servings,
-      source,
-      url,
-      directions,
-      categories,
-      difficulty,
-      image,
-      notes,
-      ingredients
-    );
+        description,
+        prepTime,
+        cookTime,
+        servings,
+        source,
+        url,
+        directions,
+        categories,
+        difficulty,
+        image,
+        notes,
+        ingredients);
   }
 
   @Override
   public Recipe createRecipe(
-    String description,
-    Integer prepTime,
-    Integer cookTime,
-    Integer servings,
-    String source,
-    String url,
-    String directions,
-    Set<Category> categories,
-    Difficulty difficulty,
-    Notes notes,
-    Set<Ingredient> ingredients
-  ) {
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Notes notes,
+      Set<Ingredient> ingredients) {
     return new Recipe(
-      description,
-      prepTime,
-      cookTime,
-      servings,
-      source,
-      url,
-      directions,
-      categories,
-      difficulty,
-      null,
-      notes,
-      ingredients
-    );
+        description,
+        prepTime,
+        cookTime,
+        servings,
+        source,
+        url,
+        directions,
+        categories,
+        difficulty,
+        null,
+        notes,
+        ingredients);
   }
 
   @Override
@@ -126,7 +123,7 @@ public class RecipeServicesImpl implements RecipeServices {
   @Override
   public Recipe findById(Long id) {
     log.debug("In findById()");
-    return recipeRepository.findById(id).orElse(null);
+    return recipeRepository.findById(id).orElse(EMPTY_RECIPE);
   }
 
   @Override

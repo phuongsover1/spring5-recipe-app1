@@ -10,14 +10,11 @@ public class CategoryTest {
 
   @BeforeEach
   public void setUp() {
-    category = new Category();
-
+    category = Category.builder().id(3L).build();
   }
 
   @Test
-  void testGetDescription() {
-
-  }
+  void testGetDescription() {}
 
   @Test
   void testGetId() {
@@ -26,7 +23,5 @@ public class CategoryTest {
   }
 
   @Test
-  void testGetRecipes() {
-
-  }
+  void testGetRecipes() {}
 }

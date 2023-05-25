@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +21,12 @@ public class UnitOfMeasure {
   private String description;
 
   public UnitOfMeasure(String description) {
+    this.description = description;
+  }
+
+  @Builder
+  public UnitOfMeasure(Long id, String description) {
+    this.id = id;
     this.description = description;
   }
 }
