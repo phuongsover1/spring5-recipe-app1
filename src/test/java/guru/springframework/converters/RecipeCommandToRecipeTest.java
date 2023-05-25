@@ -8,17 +8,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-
-import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.Category;
-import guru.springframework.domain.Difficulty;
-import guru.springframework.domain.Ingredient;
-import guru.springframework.domain.Notes;
-import guru.springframework.domain.Recipe;
 import org.junit.jupiter.api.Test;
 
-public class RecipeToRecipeCommandTest {
+import guru.springframework.commands.CategoryCommand;
+import guru.springframework.commands.IngredientCommand;
+import guru.springframework.commands.NotesCommand;
+import guru.springframework.commands.RecipeCommand;
+import guru.springframework.domain.Difficulty;
+import guru.springframework.domain.Recipe;
 
+public class RecipeCommandToRecipeTest {
   private static final Long RECIPE_ID = 1L;
   private static final Integer COOK_TIME = Integer.valueOf("5");
   private static final Integer PREP_TIME = Integer.valueOf("3");
@@ -35,29 +34,29 @@ public class RecipeToRecipeCommandTest {
   private static final Long INGRE_ID_1 = 1L;
   private static final Long INGRE_ID_2 = 2L;
 
-  RecipeToRecipeCommand convertToRecipeCommand;
+  RecipeCommandToRecipe convertToRecipe;
 
   @BeforeEach
   void setUp() {
-    convertToRecipeCommand = new RecipeToRecipeCommand(new CategoryToCategoryCommand(), new NotesToNotesCommand(),
-        new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()));
+    convertToRecipe = new RecipeCommandToRecipe(new CategoryCommandToCategory(), new NotesCommandToNotes(),
+        new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()));
   }
 
   @Test
   void testNullParameter() {
-    assertNull(convertToRecipeCommand.convert(null));
+    assertNull(convertToRecipe.convert(null));
   }
 
   @Test
   void testEmptyRecipe() {
-    RecipeCommand converted = convertToRecipeCommand.convert(new Recipe());
+    Recipe converted = convertToRecipe.convert(new RecipeCommand());
     assertNotNull(converted);
   }
 
   @Test
   void testConvert() {
     // given
-    Recipe recipe = new Recipe();
+    RecipeCommand recipe = new RecipeCommand();
     recipe.setId(RECIPE_ID);
     recipe.setCookTime(COOK_TIME);
     recipe.setPrepTime(PREP_TIME);
@@ -69,32 +68,32 @@ public class RecipeToRecipeCommandTest {
     recipe.setUrl(URL);
     recipe.setImage(RECIPE_IMAGE);
 
-    Category category_1 = new Category();
+    CategoryCommand category_1 = new CategoryCommand();
     category_1.setId(CAT_ID_1);
 
-    Category category_2 = new Category();
+    CategoryCommand category_2 = new CategoryCommand();
     category_2.setId(CAT_ID_2);
 
-    Set<Category> categories = new HashSet<>();
+    Set<CategoryCommand> categories = new HashSet<>();
     categories.add(category_1);
     categories.add(category_2);
 
     recipe.setCategories(categories);
 
-    Notes notes = new Notes();
+    NotesCommand notes = new NotesCommand();
     notes.setId(NOTES_ID);
+    notes.setRecipeNotes(DESCRIPTION);
     recipe.setNotes(notes);
 
-    Ingredient ingre_1 = new Ingredient();
+    IngredientCommand ingre_1 = new IngredientCommand();
     ingre_1.setId(INGRE_ID_1);
-    Ingredient ingre_2 = new Ingredient();
+    IngredientCommand ingre_2 = new IngredientCommand();
     ingre_2.setId(INGRE_ID_2);
 
     recipe.addIngredient(ingre_1);
     recipe.addIngredient(ingre_2);
 
-    RecipeCommand recipeCommand = convertToRecipeCommand.convert(recipe);
-
+    Recipe recipeCommand = convertToRecipe.convert(recipe);
     assertNotNull(recipeCommand);
     assertEquals(RECIPE_ID, recipeCommand.getId());
     assertEquals(COOK_TIME, recipeCommand.getCookTime());

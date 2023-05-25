@@ -4,7 +4,6 @@ import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
-import java.util.HashSet;
 import java.util.Set;
 import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,9 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
   @Autowired
   public RecipeToRecipeCommand(
-    CategoryToCategoryCommand categoryConverter,
-    NotesToNotesCommand notesConverter,
-    IngredientToIngredientCommand ingredientConverter
-  ) {
+      CategoryToCategoryCommand categoryConverter,
+      NotesToNotesCommand notesConverter,
+      IngredientToIngredientCommand ingredientConverter) {
     this.categoryConverter = categoryConverter;
     this.notesConverter = notesConverter;
     this.ingredientConverter = ingredientConverter;
@@ -34,7 +32,8 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
   @Override
   @Nullable
   public RecipeCommand convert(Recipe source) {
-    if (source == null) return null;
+    if (source == null)
+      return null;
     final RecipeCommand recipe = new RecipeCommand();
     recipe.setId(source.getId());
     recipe.setDescription(source.getDescription());
@@ -51,19 +50,15 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
     Set<Category> sourceCategory = source.getCategories();
     if (sourceCategory != null && sourceCategory.size() > 0) {
       source
-        .getCategories()
-        .forEach(category ->
-          recipe.getCategories().add(categoryConverter.convert(category))
-        );
+          .getCategories()
+          .forEach(category -> recipe.getCategories().add(categoryConverter.convert(category)));
     }
 
     Set<Ingredient> sourceIngredients = source.getIngredients();
     if (sourceIngredients != null && sourceIngredients.size() > 0) {
       source
-        .getIngredients()
-        .forEach(ingredient ->
-          recipe.getIngredients().add(ingredientConverter.convert(ingredient))
-        );
+          .getIngredients()
+          .forEach(ingredient -> recipe.getIngredients().add(ingredientConverter.convert(ingredient)));
     }
     return recipe;
   }

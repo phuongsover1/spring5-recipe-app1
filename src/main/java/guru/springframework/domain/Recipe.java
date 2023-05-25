@@ -40,12 +40,8 @@ public class Recipe {
   // private Difficulty difficulty
 
   @ManyToMany
-  @JoinTable(
-    name = "recipe_category",
-    joinColumns = @JoinColumn(name = "recipe_id"),
-    inverseJoinColumns = @JoinColumn(name = "category_id")
-  )
-  private Set<Category> categories;
+  @JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+  private Set<Category> categories = new HashSet<>();
 
   @Enumerated(value = EnumType.STRING)
   private Difficulty difficulty;
@@ -61,19 +57,18 @@ public class Recipe {
 
   @Builder
   public Recipe(
-    String description,
-    Integer prepTime,
-    Integer cookTime,
-    Integer servings,
-    String source,
-    String url,
-    String directions,
-    Set<Category> categories,
-    Difficulty difficulty,
-    Byte[] image,
-    Notes notes,
-    Set<Ingredient> ingredients
-  ) {
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Byte[] image,
+      Notes notes,
+      Set<Ingredient> ingredients) {
     this.description = description;
     this.prepTime = prepTime;
     this.cookTime = cookTime;
@@ -89,32 +84,30 @@ public class Recipe {
   }
 
   public Recipe(
-    String description,
-    Integer prepTime,
-    Integer cookTime,
-    Integer servings,
-    String source,
-    String url,
-    String directions,
-    Set<Category> categories,
-    Difficulty difficulty,
-    Notes notes,
-    Set<Ingredient> ingredients
-  ) {
+      String description,
+      Integer prepTime,
+      Integer cookTime,
+      Integer servings,
+      String source,
+      String url,
+      String directions,
+      Set<Category> categories,
+      Difficulty difficulty,
+      Notes notes,
+      Set<Ingredient> ingredients) {
     this(
-      description,
-      prepTime,
-      cookTime,
-      servings,
-      source,
-      url,
-      directions,
-      categories,
-      difficulty,
-      null,
-      notes,
-      ingredients
-    );
+        description,
+        prepTime,
+        cookTime,
+        servings,
+        source,
+        url,
+        directions,
+        categories,
+        difficulty,
+        null,
+        notes,
+        ingredients);
   }
 
   public Recipe addIngredient(Ingredient ingredient) {
@@ -122,4 +115,5 @@ public class Recipe {
     ingredient.setRecipe(this);
     return this;
   }
+
 }

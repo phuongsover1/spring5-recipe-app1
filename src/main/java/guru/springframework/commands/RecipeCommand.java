@@ -29,4 +29,10 @@ public class RecipeCommand {
   private Byte[] image;
   private NotesCommand notes;
   private Set<IngredientCommand> ingredients = new HashSet<>();
+
+  public RecipeCommand addIngredient(IngredientCommand ingre) {
+    ingredients.add(ingre);
+    ingre.setRecipe(this);
+    return this;
+  }
 }
