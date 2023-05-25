@@ -1,7 +1,6 @@
 package guru.springframework.converters;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
@@ -14,17 +13,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class RecipeToRecipeCommandTest {
 
-  @Mock
-  CategoryToCategoryCommand categoryCommand;
+  @Mock CategoryToCategoryCommand categoryCommand;
 
-  @Mock
-  NotesToNotesCommand notesCommand;
+  @Mock NotesToNotesCommand notesCommand;
 
-  @Mock
-  IngredientToIngredientCommand ingredientCommand;
+  @Mock IngredientToIngredientCommand ingredientCommand;
 
-  @InjectMocks
-  RecipeToRecipeCommand recipeCommand;
+  @InjectMocks RecipeToRecipeCommand recipeCommand;
 
   @Test
   void testConvert() {

@@ -61,10 +61,10 @@ public class RecipeControllerTest {
     assertEquals(tempRecipe, recipeCaptor.getValue());
 
     mockMvc
-      .perform(get("/recipe/show/1"))
-      .andExpect(status().isOk())
-      .andExpect(view().name("recipe/show"))
-      .andExpect(model().attributeExists("recipe"));
+        .perform(get("/recipe/show/1"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("recipe/show"))
+        .andExpect(model().attributeExists("recipe"));
   }
 
   @Test
@@ -73,8 +73,8 @@ public class RecipeControllerTest {
     Long idToDelete = Long.valueOf("2");
 
     mockMvc
-      .perform(get("/recipe/" + idToDelete + "/delete"))
-      .andExpect(status().is3xxRedirection())
-      .andExpect(view().name("redirect:/"));
+        .perform(get("/recipe/" + idToDelete + "/delete"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/"));
   }
 }
