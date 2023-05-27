@@ -25,7 +25,7 @@ public class RecipeController {
     this.recipeServices = recipeServices;
   }
 
-  @GetMapping("/show/{id}")
+  @GetMapping("/{id}/show")
   public String getRecipe(@PathVariable String id, Model model) {
     Recipe recipe = recipeServices.findById(Long.parseLong(id));
     model.addAttribute("recipe", recipe);
@@ -41,9 +41,8 @@ public class RecipeController {
   @GetMapping("/{id}/update")
   public String updateRecipe(@PathVariable String id, Model model) {
     model.addAttribute(
-      "recipe",
-      recipeServices.findCommandById(Long.valueOf(id))
-    );
+        "recipe",
+        recipeServices.findCommandById(Long.valueOf(id)));
     return "recipe/recipeform";
   }
 

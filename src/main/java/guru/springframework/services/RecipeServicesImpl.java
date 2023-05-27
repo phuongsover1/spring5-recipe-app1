@@ -39,6 +39,7 @@ public class RecipeServicesImpl implements RecipeServices {
   }
 
   @Override
+  @Transactional
   public Recipe save(Recipe recipe) {
     if (recipe != null) {
       return recipeRepository.save(recipe);
