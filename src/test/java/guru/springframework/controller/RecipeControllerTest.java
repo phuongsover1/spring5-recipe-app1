@@ -96,7 +96,7 @@ public class RecipeControllerTest {
         .perform(MockMvcRequestBuilders.post("/recipe").contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("id", "").param("description", "some string"))
         .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.view().name("redirect:/recipe/show/2"));
+        .andExpect(MockMvcResultMatchers.view().name("redirect:/recipe/2/show"));
 
   }
 
