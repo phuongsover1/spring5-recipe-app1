@@ -26,6 +26,7 @@ public class Ingredient {
   private Long id;
 
   private String description;
+
   private BigDecimal amount;
 
   @ManyToOne

@@ -14,6 +14,7 @@ import guru.springframework.services.RecipeServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,32 +27,41 @@ public class IngredientControllerTest {
   @Mock
   RecipeServices recipeService;
 
+  @InjectMocks
   IngredientController controller;
 
   MockMvc mockMvc;
 
   @BeforeEach
   public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-
-    controller = new IngredientController(recipeService);
     mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
   }
 
   @Test
   public void testListIngredients() throws Exception {
-    //given
+    // given
     RecipeCommand recipeCommand = new RecipeCommand();
     when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
 
-    //when
+    // when
     mockMvc
-      .perform(get("/recipe/1/ingredients"))
-      .andExpect(status().isOk())
-      .andExpect(view().name("recipe/ingredient/list"))
-      .andExpect(model().attributeExists("recipe"));
+        .perform(get("/recipe/1/ingredients"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("recipe/ingredient/list"))
+        .andExpect(model().attributeExists("recipe"));
 
-    //then
+    // then
     verify(recipeService, times(1)).findCommandById(anyLong());
   }
+
+  @Test
+  void testGetIngredient() {
+    // bỏ vào một recipe command có 1 Ingredient command trong đó, kết quả khi trả
+    // về là phải trùng với view name , và phải có 1 object trong
+    // model attribute
+    RecipeCommand recipeCommand = new RecipeCommand();
+    recipeCommand.setId(2L);
+
+  }
+
 }

@@ -153,6 +153,7 @@ public class RecipeServicesImpl implements RecipeServices {
   @Transactional
   @Override
   public void deleteById(Long id) {
+    log.debug("deleted ID: ", id);
     recipeRepository.deleteById(id);
   }
 }
